@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid black;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr 4fr 1fr;
+  grid-template-rows: 50px 4fr 1fr;
+  height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration-style: solid;
+  grid-area: 1/1/2/4;
+}
+
+.game-grid {
+  grid-area: 2/2/3/3;
+}
