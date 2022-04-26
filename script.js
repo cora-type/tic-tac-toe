@@ -26,6 +26,7 @@ const displayController = (() => {
         image.src = "images/ex.svg";
         box.appendChild(image);
       } else {
+        // if it's a circle, put a circle
         image.style.width = "50px";
         image.src = "images/circle.svg";
         box.appendChild(image);
