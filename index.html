@@ -13,7 +13,36 @@
     />
   </head>
   <body>
-    <div class="header">tic X tac O toe X</div>
+    <div class="header">X O</div>
+
+    <div class="user-input">
+      <input type="text" id="user1" name="name" placeholder="user_" autofocus />
+      <button id="user1Button">submit</button>
+      <div class="mark-input">
+        <input
+          id="toggle-on"
+          class="toggle toggle-left"
+          name="toggle"
+          value="false"
+          type="radio"
+          checked
+        />
+        <label for="toggle-on" class="mark-button">X</label>
+        <input
+          id="toggle-off"
+          class="toggle toggle-right"
+          name="toggle"
+          value="true"
+          type="radio"
+        />
+        <label for="toggle-off" class="mark-button">O</label>
+      </div>
+    </div>
+
+    <div class="opponent">
+      <input type="text" id="opponent" name="name" placeholder="opponent_" />
+      <button id="opponentButton">start game</button>
+    </div>
 
     <div class="game-grid">
       <div class="box" id="0"></div>
