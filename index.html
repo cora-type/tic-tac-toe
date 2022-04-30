@@ -17,10 +17,16 @@
 
     <div class="user-input">
       <input type="text" id="user1" name="name" placeholder="user_" autofocus />
-      <button id="user1Button">add user</button>
+      <a class="fancy" id="enterButton" href="#">
+        <span class="top-key"></span>
+        <span class="text">+add user</span>
+        <span class="bottom-key-1"></span>
+        <span class="bottom-key-2"></span>
+      </a>
     </div>
 
     <div class="button-input">
+      select marker &nbsp;
       <div class="mark-input">
         <input
           id="toggle-on"
@@ -44,8 +50,20 @@
 
     <div class="opponent">
       <input type="text" id="opponent" name="name" placeholder="opponent_" />
-      <button id="opponentButton">start game</button>
+      <a class="fancy opponent" id="opponentButton" href="#">
+        <span class="top-key"></span>
+        <span class="text">start game</span>
+        <span class="bottom-key-1"></span>
+        <span class="bottom-key-2"></span>
+      </a>
+      <a class="fancy reset" id="resetButton" href="#">
+        <span class="top-key"></span>
+        <span class="text">reset game</span>
+        <span class="bottom-key-1"></span>
+        <span class="bottom-key-2"></span>
+      </a>
     </div>
+
     <div class="user-name">-</div>
     <div class="versus">VS.</div>
     <div class="opponent-name">-</div>

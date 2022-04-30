@@ -88,11 +88,9 @@ const gameBoard = (() => {
 const displayController = (() => {
   let gameboard = gameBoard.gameboard; // grab the current gameboard array
 
-  const rebooot = () => {
+  const reboot = () => {
     gameboard = Array(9).fill(undefined);
-    player1 = "";
-    player2 = "";
-    currentPlayer = "";
+    player1 = player2 = currentPlayer = "";
     const markers = document.querySelectorAll(".marker");
     markers.forEach((marker) => {
       marker.remove();
@@ -122,7 +120,7 @@ const displayController = (() => {
     });
   };
 
-  return { displayUpdate, rebooot };
+  return { displayUpdate, reboot };
 })();
 
 const markFactory = (mark, element) => {};
@@ -139,7 +137,7 @@ const player = (name, mark) => {
 
 const gameInitializer = (() => {
   const userName = document.getElementById("user1");
-  const user1Submit = document.getElementById("user1Button");
+  const user1Submit = document.getElementById("enterButton");
 
   const displayUserName = document.querySelector(".user-name");
   const displayOpponentName = document.querySelector(".opponent-name");

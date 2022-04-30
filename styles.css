@@ -1,8 +1,33 @@
+@font-face {
+  font-family: "Baron-Neue";
+  src: url(fonts/BaronNeue-Regular.otf) format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "Baron-Neue";
+  src: url(fonts/BaronNeue-Bold.otf) format("truetype");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Baron-Neue";
+  src: url(fonts/BaronNeue-Italic.otf) format("truetype");
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "CodeNext";
+  src: url(fonts/CodeNext-Trial-Regular.ttf) format("truetype");
+  font-weight: normal;
+}
+
 * {
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  font-family: "Baron-Neue";
   /* border: 1px solid black; */
 }
 
@@ -14,6 +39,7 @@ body {
 }
 
 .header {
+  font-size: 50px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,6 +68,16 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-wrap: wrap;
+}
+
+#user1,
+#opponent {
+  height: 70px;
+  font-size: 70px;
+  width: 80%;
+  border: none;
+  caret-color: red;
 }
 
 .user-name {
@@ -49,6 +85,7 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
+  font-size: 42px;
 }
 
 .button-input {
@@ -56,6 +93,21 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-wrap: wrap;
+}
+
+#user1button {
+  border: 0px;
+  cursor: pointer;
+  background-color: white;
+}
+
+.opponent {
+  grid-area: 2/5/3/6;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .opponent-name {
@@ -63,15 +115,14 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
-}
-.opponent {
-  grid-area: 2/5/3/6;
-  align-items: center;
-  justify-content: center;
-  display: flex;
+  font-size: 42px;
 }
 
+.fancy.reset {
+  margin: 20px;
+}
 .versus {
+  font-size: 130px;
   grid-area: 4/3/5/4;
   align-items: center;
   justify-content: center;
@@ -145,4 +196,117 @@ input[type="radio"].toggle:checked + label {
 
 input[type="radio"].toggle:checked + label:after {
   left: 0;
+}
+
+/* From uiverse.io */
+.fancy {
+  background-color: transparent;
+  border: 2px solid #000;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  margin: 0;
+  outline: none;
+  overflow: visible;
+  padding: 1.25em 2em;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+  transition: all 0.3s ease-in-out;
+  user-select: none;
+  font-size: 13px;
+}
+
+.fancy::before {
+  content: " ";
+  width: 1.5625rem;
+  height: 2px;
+  background: red;
+  top: 50%;
+  left: 1.5em;
+  position: absolute;
+  transform: translateY(-50%);
+  transform-origin: center;
+  transition: background 0.3s linear, width 0.3s linear;
+}
+
+.opponent::before {
+  background: green;
+}
+
+.reset::before {
+  background: blue;
+}
+
+.fancy .text {
+  font-size: 1.125em;
+  line-height: 1.33333em;
+  padding-left: 2em;
+  display: block;
+  text-align: left;
+  transition: all 0.3s ease-in-out;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: black;
+}
+
+.fancy .top-key {
+  height: 2px;
+  width: 1.5625rem;
+  top: -2px;
+  left: 0.625rem;
+  position: absolute;
+  background: #e8e8e8;
+  transition: width 0.5s ease-out, left 0.3s ease-out;
+}
+
+.fancy .bottom-key-1 {
+  height: 2px;
+  width: 1.5625rem;
+  right: 1.875rem;
+  bottom: -2px;
+  position: absolute;
+  background: #e8e8e8;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy .bottom-key-2 {
+  height: 2px;
+  width: 0.625rem;
+  right: 0.625rem;
+  bottom: -2px;
+  position: absolute;
+  background: #e8e8e8;
+  transition: width 0.5s ease-out, right 0.3s ease-out;
+}
+
+.fancy:hover {
+  color: white;
+  background: black;
+}
+
+.fancy:hover::before {
+  width: 0.9375rem;
+  background: white;
+}
+
+.fancy:hover .text {
+  color: white;
+  padding-left: 1.5em;
+}
+
+.fancy:hover .top-key {
+  left: -2px;
+  width: 0px;
+}
+
+.fancy:hover .bottom-key-1,
+.fancy:hover .bottom-key-2 {
+  right: 0;
+  width: 0;
 }
