@@ -16,6 +16,7 @@ const winners = [
 const gameBoard = (() => {
   let gameboard = Array(9).fill(undefined);
   let boxes = document.querySelectorAll(".box");
+  const versus = document.querySelector(".versus");
 
   // determine winner
   const winner = () => {
@@ -30,7 +31,9 @@ const gameBoard = (() => {
           boxes.forEach((box) => {
             box.removeEventListener("click", switcher);
           });
-          console.log("winner");
+          toggle
+            ? (versus.innerText = player2.name + ", wins")
+            : (versus.innerText = player1.name + ", wins");
         }
       }
     }
