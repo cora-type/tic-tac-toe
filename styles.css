@@ -8,8 +8,8 @@
 
 body {
   display: grid;
-  grid-template-columns: 1fr 5fr 1fr;
-  grid-template-rows: 1fr 8fr 1fr;
+  grid-template-columns: 3fr 200px 200px 200px 3fr;
+  grid-template-rows: 2fr 300px 300px 4fr;
   height: 100vh;
 }
 
@@ -18,14 +18,14 @@ body {
   align-items: center;
   justify-content: center;
   text-decoration-style: solid;
-  grid-area: 1/1/2/4;
+  grid-area: 1/1/2/6;
 }
 
 .game-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr;
-  grid-area: 2/2/3/3;
+  grid-area: 2/2/4/5;
   align-items: center;
   justify-content: center;
   border: 1px solid black;
@@ -43,11 +43,40 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
-  flex-wrap: wrap;
 }
 
+.user-name {
+  grid-area: 4/1/5/3;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.button-input {
+  grid-area: 3/1/4/2;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.opponent-name {
+  grid-area: 4/4/5/6;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
 .opponent {
-  grid-area: 2/3/3/4;
+  grid-area: 2/5/4/6;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
+.versus {
+  grid-area: 4/3/5/4;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 }
 
 /* checkbox */

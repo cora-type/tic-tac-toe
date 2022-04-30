@@ -149,6 +149,7 @@ const gameInitializer = (() => {
     } else {
       player1 = player(name, "O");
     }
+    userName.value = "";
   });
 
   //create opponent
