@@ -158,11 +158,13 @@ const gameInitializer = (() => {
   //create opponent
   opponentSubmit.addEventListener("click", function () {
     let name = opponentName.value;
-    if (player1.mark == "X") {
-      player2 = player(name, "O");
-    } else player2 = player(name, "X");
+    player1.mark == "X"
+      ? (player2 = player(name, "O"))
+      : (player2 = player(name, "X"));
 
     currentPlayer = player1;
+    opponentName.value = "";
+    displayOpponentName.innerText = player2.name + ", " + player2.mark;
     gameBoard.marker(); // initializes gameboard for marking
   });
 
