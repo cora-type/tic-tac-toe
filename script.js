@@ -17,6 +17,7 @@ const gameBoard = (() => {
   let gameboard = Array(9).fill(undefined);
   let boxes = document.querySelectorAll(".box");
 
+  // determine winner
   const winner = () => {
     for (let i = 0; i < winners.length; i++) {
       let r = winners[i]; //[1,2,3]
@@ -35,22 +36,37 @@ const gameBoard = (() => {
     }
   };
 
+  // used to keep track of currentplayer
+  let toggle = false;
+  let playerSwapper = () => {
+    if (toggle == false) {
+      toggle = true;
+      return player2;
+    }
+    toggle = false;
+    return player1;
+  };
+
   // references the event.target, which is the box
   function switcher(event) {
+    //if currentPlayer's mark is #, remove from array at box.id, replace with 'X'; update display; swap player;.
     switch (currentPlayer.mark) {
       case "X":
+        toggle;
         gameboard.splice(event.target.id, 1, "X");
         displayController.displayUpdate();
-        currentPlayer = player2;
+        currentPlayer = playerSwapper();
+        event.target.removeEventListener("click", switcher);
         break;
       case "O":
         gameboard.splice(event.target.id, 1, "O");
         displayController.displayUpdate();
-        currentPlayer = player1;
+        currentPlayer = playerSwapper();
+        event.target.removeEventListener("click", switcher);
         break;
     }
   }
-
+  //sets up boxes for marking using ^ switcher
   const marker = () => {
     boxes.forEach((box) => {
       box.addEventListener("click", switcher);
@@ -64,6 +80,7 @@ const gameBoard = (() => {
   };
 })();
 
+//reflects status of gameboard array
 const displayController = (() => {
   let gameboard = gameBoard.gameboard; // grab the current gameboard array
 
@@ -129,18 +146,26 @@ const gameInitializer = (() => {
     let name = userName.value;
     if (userMarkX.checked) {
       player1 = player(name, "X");
-    } else player1 = player(name, "O");
+    } else {
+      player1 = player(name, "O");
+    }
   });
 
   //create opponent
   opponentSubmit.addEventListener("click", function () {
     let name = opponentName.value;
-    if ((player1.mark = "X")) {
+
+    if (player1.mark == "X") {
       player2 = player(name, "O");
     } else player2 = player(name, "X");
 
     currentPlayer = player1;
-    gameBoard.marker();
+
+    console.log(player1);
+    console.log(player2);
+    console.log(currentPlayer);
+
+    gameBoard.marker(); // initializes gameboard for marking
   });
 
   return {};
