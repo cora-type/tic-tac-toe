@@ -136,6 +136,9 @@ const gameInitializer = (() => {
   const userName = document.getElementById("user1");
   const user1Submit = document.getElementById("user1Button");
 
+  const displayUserName = document.querySelector(".user-name");
+  const displayOpponentName = document.querySelector(".opponent-name");
+
   const opponentName = document.getElementById("opponent");
   const opponentSubmit = document.getElementById("opponentButton");
 
@@ -144,28 +147,22 @@ const gameInitializer = (() => {
   //create player
   user1Submit.addEventListener("click", function () {
     let name = userName.value;
-    if (userMarkX.checked) {
-      player1 = player(name, "X");
-    } else {
-      player1 = player(name, "O");
-    }
+    userMarkX.checked
+      ? (player1 = player(name, "X"))
+      : (player1 = player(name, "O"));
+
     userName.value = "";
+    displayUserName.innerText = player1.name + ", " + player1.mark;
   });
 
   //create opponent
   opponentSubmit.addEventListener("click", function () {
     let name = opponentName.value;
-
     if (player1.mark == "X") {
       player2 = player(name, "O");
     } else player2 = player(name, "X");
 
     currentPlayer = player1;
-
-    console.log(player1);
-    console.log(player2);
-    console.log(currentPlayer);
-
     gameBoard.marker(); // initializes gameboard for marking
   });
 
