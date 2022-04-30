@@ -31,7 +31,8 @@ const gameBoard = (() => {
           boxes.forEach((box) => {
             box.removeEventListener("click", switcher);
           });
-          toggle
+
+          toggle //declare winner depending on toggle position
             ? (versus.innerText = player2.name + ", wins")
             : (versus.innerText = player1.name + ", wins");
         }
@@ -99,22 +100,21 @@ const displayController = (() => {
   };
 
   const displayUpdate = () => {
-    gameboard.forEach((result, idx) => {
+    gameboard.forEach((index, idx) => {
       let box = document.getElementById(idx);
       // for each element in the gameboard, if the array index isn't empty and it doesnt already have a mark, add a mark
-      if (!result == "" && !box.hasChildNodes()) {
+      if (!index == "" && !box.hasChildNodes()) {
         let image = document.createElement("img");
-        if (result == "X") {
+        if (index == "X") {
           image.classList.add("marker");
-          image.style.width = "100px";
-          image.src = "images/ex.svg";
+          image.style.width = "100%";
+          image.src = "images/x.svg";
           box.appendChild(image);
           gameBoard.winner();
-        } else if (result == "O") {
+        } else if (index == "O") {
           image.classList.add("marker");
-          image.style.width = "50px";
-          image.src = "images/circle.svg";
-          image.style.cursor = "default";
+          image.src = "images/cirque.svg";
+          image.style.width = "100%";
           box.appendChild(image);
           gameBoard.winner();
         }
@@ -124,6 +124,8 @@ const displayController = (() => {
 
   return { displayUpdate, rebooot };
 })();
+
+const markFactory = (mark, element) => {};
 
 //player factory
 const player = (name, mark) => {

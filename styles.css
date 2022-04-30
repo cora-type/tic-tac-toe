@@ -23,19 +23,18 @@ body {
 
 .game-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 200px 200px 200px;
+  grid-template-rows: 200px 200px 200px;
   grid-area: 2/2/4/5;
   align-items: center;
   justify-content: center;
-  border: 1px solid black;
 }
 
 .box {
   width: 100%;
   height: 100%;
   cursor: pointer;
-  border: 1px solid black;
+  border: 1px solid lightgray;
 }
 
 .user-input {
@@ -66,7 +65,7 @@ body {
   display: flex;
 }
 .opponent {
-  grid-area: 2/5/4/6;
+  grid-area: 2/5/3/6;
   align-items: center;
   justify-content: center;
   display: flex;
@@ -77,6 +76,10 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
+}
+
+.marker {
+  cursor: default;
 }
 
 /* checkbox */
