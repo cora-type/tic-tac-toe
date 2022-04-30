@@ -27,7 +27,7 @@ const gameBoard = (() => {
       if (first && second && third) {
         if (first === second && second === third) {
           boxes.forEach((box) => {
-            box.removeEventListener("click", marker._switcher);
+            box.removeEventListener("click", switcher);
           });
           console.log("winner");
         }
@@ -35,27 +35,25 @@ const gameBoard = (() => {
     }
   };
 
-  //sets up gameboard and enables it for marking, call once.
+  // references the event.target, which is the box
+  function switcher(event) {
+    switch (currentPlayer.mark) {
+      case "X":
+        gameboard.splice(event.target.id, 1, "X");
+        displayController.displayUpdate();
+        currentPlayer = player2;
+        break;
+      case "O":
+        gameboard.splice(event.target.id, 1, "O");
+        displayController.displayUpdate();
+        currentPlayer = player1;
+        break;
+    }
+  }
+
   const marker = () => {
     boxes.forEach((box) => {
-      box.addEventListener(
-        "click",
-        function _switcher() {
-          switch (currentPlayer.mark) {
-            case "X":
-              gameboard.splice(box.id, 1, "X");
-              displayController.displayUpdate();
-              currentPlayer = player2;
-              break;
-            case "O":
-              gameboard.splice(box.id, 1, "O");
-              displayController.displayUpdate();
-              currentPlayer = player1;
-              break;
-          }
-        },
-        { once: true }
-      );
+      box.addEventListener("click", switcher);
     });
   };
 
