@@ -1,6 +1,7 @@
 let player1;
 let player2;
 let currentPlayer;
+let toggle = false;
 
 const winners = [
   [0, 1, 2],
@@ -15,6 +16,7 @@ const winners = [
 
 const gameBoard = (() => {
   let gameboard = Array(9).fill(undefined);
+
   let boxes = document.querySelectorAll(".box");
   const versus = document.querySelector(".versus");
 
@@ -22,16 +24,15 @@ const gameBoard = (() => {
   const winner = () => {
     for (let i = 0; i < winners.length; i++) {
       let r = winners[i]; //[1,2,3]
-      let first = gameboard[r[0]];
-      let second = gameboard[r[1]];
-      let third = gameboard[r[2]];
+      let first = gameBoard.gameboard[r[0]];
+      let second = gameBoard.gameboard[r[1]];
+      let third = gameBoard.gameboard[r[2]];
       // if all 3 arent empty, compare them, if theyre all the same mark, winner based on mark
       if (first && second && third) {
         if (first === second && second === third) {
           boxes.forEach((box) => {
             box.removeEventListener("click", switcher);
           });
-
           toggle //declare winner depending on toggle position
             ? (versus.innerText = player2.name + ", wins")
             : (versus.innerText = player1.name + ", wins");
@@ -41,7 +42,7 @@ const gameBoard = (() => {
   };
 
   // used to keep track of currentplayer
-  let toggle = false;
+
   let playerSwapper = () => {
     if (toggle == false) {
       toggle = true;
@@ -56,14 +57,13 @@ const gameBoard = (() => {
     //if currentPlayer's mark is #, remove from array at box.id, replace with 'X'; update display; swap player;.
     switch (currentPlayer.mark) {
       case "X":
-        toggle;
-        gameboard.splice(event.target.id, 1, "X");
+        gameBoard.gameboard.splice(event.target.id, 1, "X");
         displayController.displayUpdate();
         currentPlayer = playerSwapper();
         event.target.removeEventListener("click", switcher);
         break;
       case "O":
-        gameboard.splice(event.target.id, 1, "O");
+        gameBoard.gameboard.splice(event.target.id, 1, "O");
         displayController.displayUpdate();
         currentPlayer = playerSwapper();
         event.target.removeEventListener("click", switcher);
@@ -83,22 +83,14 @@ const gameBoard = (() => {
     winner,
   };
 })();
+//end of IIFE
 
 //reflects status of gameboard array
 const displayController = (() => {
-  let gameboard = gameBoard.gameboard; // grab the current gameboard array
-
-  const reboot = () => {
-    gameboard = Array(9).fill(undefined);
-    player1 = player2 = currentPlayer = "";
-    const markers = document.querySelectorAll(".marker");
-    markers.forEach((marker) => {
-      marker.remove();
-    });
-  };
+  // let gameboard = gameBoard.gameboard; // grab the current gameboard array
 
   const displayUpdate = () => {
-    gameboard.forEach((index, idx) => {
+    gameBoard.gameboard.forEach((index, idx) => {
       let box = document.getElementById(idx);
       // for each element in the gameboard, if the array index isn't empty and it doesnt already have a mark, add a mark
       if (!index == "" && !box.hasChildNodes()) {
@@ -120,10 +112,8 @@ const displayController = (() => {
     });
   };
 
-  return { displayUpdate, reboot };
+  return { displayUpdate };
 })();
-
-const markFactory = (mark, element) => {};
 
 //player factory
 const player = (name, mark) => {
@@ -137,15 +127,29 @@ const player = (name, mark) => {
 
 const gameInitializer = (() => {
   const userName = document.getElementById("user1");
-  const user1Submit = document.getElementById("enterButton");
-
   const displayUserName = document.querySelector(".user-name");
+  const opponentName = document.getElementById("opponent");
   const displayOpponentName = document.querySelector(".opponent-name");
 
-  const opponentName = document.getElementById("opponent");
+  const user1Submit = document.getElementById("enterButton");
   const opponentSubmit = document.getElementById("opponentButton");
-
+  const resetButton = document.getElementById("resetButton");
   const userMarkX = document.getElementById("toggle-on");
+
+  const reboot = () => {
+    toggle = false;
+    player1 =
+      player2 =
+      currentPlayer =
+      displayOpponentName.innerText =
+      displayUserName.innerText =
+        "";
+    const markers = document.querySelectorAll(".marker");
+    markers.forEach((marker) => {
+      marker.remove();
+    });
+    gameBoard.gameboard = Array(9).fill(undefined);
+  };
 
   //create player
   user1Submit.addEventListener("click", function () {
@@ -158,7 +162,7 @@ const gameInitializer = (() => {
     displayUserName.innerText = player1.name + ", " + player1.mark;
   });
 
-  //create opponent
+  //create opponent, start game
   opponentSubmit.addEventListener("click", function () {
     let name = opponentName.value;
     player1.mark == "X"
@@ -169,7 +173,10 @@ const gameInitializer = (() => {
     opponentName.value = "";
     displayOpponentName.innerText = player2.name + ", " + player2.mark;
     gameBoard.marker(); // initializes gameboard for marking
+    displayController.displayUpdate();
   });
+
+  resetButton.addEventListener("click", reboot);
 
   return {};
 })();
