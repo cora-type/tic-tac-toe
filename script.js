@@ -2,6 +2,7 @@ let player1;
 let player2;
 let currentPlayer;
 let toggle = false;
+let winnerFound = false;
 
 const winners = [
   [0, 1, 2],
@@ -27,7 +28,7 @@ const gameBoard = (() => {
       let first = gameBoard.gameboard[r[0]];
       let second = gameBoard.gameboard[r[1]];
       let third = gameBoard.gameboard[r[2]];
-      let j = gameBoard.gameboard.some((item) => item === undefined);
+      let j = gameBoard.gameboard;
 
       // if all 3 arent undefined, compare them, if theyre all the same mark, winner based on mark
       if (first && second && third) {
@@ -35,9 +36,14 @@ const gameBoard = (() => {
           boxes.forEach((box) => {
             box.removeEventListener("click", switcher);
           });
+          winnerFound = true;
           toggle //declare winner depending on toggle position
             ? (versus.innerText = player2.name + ", wins")
             : (versus.innerText = player1.name + ", wins");
+        } else if (winnerFound == false && j.includes(undefined) == false) {
+          //if there are no empty spaces left, and a winner still hasnt been found
+          winnerFound = false;
+          versus.innerText = "tie";
         }
       }
     }
@@ -142,6 +148,7 @@ const gameInitializer = (() => {
 
   const reboot = () => {
     let markers = document.querySelectorAll(".marker");
+    winnerFound = false;
     toggle = false;
     player1 =
       player2 =
@@ -186,6 +193,7 @@ const gameInitializer = (() => {
   replayButton.addEventListener("click", function () {
     let markers = document.querySelectorAll(".marker");
     currentPlayer = player1;
+    winnerFound = false;
     toggle = false;
     versus.innerText = "VS";
     markers.forEach((marker) => {
