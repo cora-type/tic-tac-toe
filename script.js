@@ -27,7 +27,9 @@ const gameBoard = (() => {
       let first = gameBoard.gameboard[r[0]];
       let second = gameBoard.gameboard[r[1]];
       let third = gameBoard.gameboard[r[2]];
-      // if all 3 arent empty, compare them, if theyre all the same mark, winner based on mark
+      let j = gameBoard.gameboard.some((item) => item === undefined);
+
+      // if all 3 arent undefined, compare them, if theyre all the same mark, winner based on mark
       if (first && second && third) {
         if (first === second && second === third) {
           boxes.forEach((box) => {
@@ -58,12 +60,14 @@ const gameBoard = (() => {
     switch (currentPlayer.mark) {
       case "X":
         gameBoard.gameboard.splice(event.target.id, 1, "X");
+        gameBoard.winner();
         displayController.displayUpdate();
         currentPlayer = playerSwapper();
         event.target.removeEventListener("click", switcher);
         break;
       case "O":
         gameBoard.gameboard.splice(event.target.id, 1, "O");
+        gameBoard.winner();
         displayController.displayUpdate();
         currentPlayer = playerSwapper();
         event.target.removeEventListener("click", switcher);
@@ -100,13 +104,11 @@ const displayController = (() => {
           image.style.width = "100%";
           image.src = "images/x.svg";
           box.appendChild(image);
-          gameBoard.winner();
         } else if (index == "O") {
           image.classList.add("marker");
           image.src = "images/cirque.svg";
           image.style.width = "100%";
           box.appendChild(image);
-          gameBoard.winner();
         }
       }
     });
@@ -130,13 +132,16 @@ const gameInitializer = (() => {
   const displayUserName = document.querySelector(".user-name");
   const opponentName = document.getElementById("opponent");
   const displayOpponentName = document.querySelector(".opponent-name");
+  const versus = document.querySelector(".versus");
 
   const user1Submit = document.getElementById("enterButton");
   const opponentSubmit = document.getElementById("opponentButton");
   const resetButton = document.getElementById("resetButton");
   const userMarkX = document.getElementById("toggle-on");
+  const replayButton = document.querySelector(".cta");
 
   const reboot = () => {
+    let markers = document.querySelectorAll(".marker");
     toggle = false;
     player1 =
       player2 =
@@ -144,7 +149,7 @@ const gameInitializer = (() => {
       displayOpponentName.innerText =
       displayUserName.innerText =
         "";
-    const markers = document.querySelectorAll(".marker");
+    versus.innerText = "VS.";
     markers.forEach((marker) => {
       marker.remove();
     });
@@ -178,5 +183,17 @@ const gameInitializer = (() => {
 
   resetButton.addEventListener("click", reboot);
 
+  replayButton.addEventListener("click", function () {
+    let markers = document.querySelectorAll(".marker");
+    currentPlayer = player1;
+    toggle = false;
+    versus.innerText = "VS";
+    markers.forEach((marker) => {
+      marker.remove();
+    });
+    gameBoard.gameboard = Array(9).fill(undefined);
+    gameBoard.marker(); // initializes gameboard for marking
+    displayController.displayUpdate();
+  });
   return {};
 })();
