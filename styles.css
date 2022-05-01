@@ -77,8 +77,8 @@ body {
 
 #user1,
 #opponent {
-  height: 70px;
-  font-size: 70px;
+  height: 60px;
+  font-size: 60px;
   width: 80%;
   border: none;
   caret-color: red;
