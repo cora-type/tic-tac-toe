@@ -88,23 +88,19 @@ const gameBoard = (() => {
   // references the event.target, which is the box
   function aiMarker(event) {
     //if currentPlayer is the user, mark the grid with user's mark.
-    switch (currentPlayer) {
-      case player1:
-        gameBoard.gameboard.splice(event.target.id, 1, player1.mark);
-        gameBoard.winner(aiMarker);
-        displayController.displayUpdate();
-        currentPlayer = playerSwapper();
-        event.target.removeEventListener("click", aiMarker);
-        break;
-      case player2:
-        let r = minimax(gameBoard.gameboard, player2.mark);
-        gameBoard.gameboard.splice(r.index, 1, player2.mark);
-        gameBoard.winner(aiMarker);
-        displayController.displayUpdate();
-        currentPlayer = playerSwapper();
-        boxes[r.index].removeEventListener("click", aiMarker);
-        break;
-    }
+    gameBoard.gameboard.splice(event.target.id, 1, player1.mark);
+    gameBoard.winner(aiMarker);
+    displayController.displayUpdate();
+    currentPlayer = playerSwapper();
+    event.target.removeEventListener("click", aiMarker);
+    setTimeout(() => {
+      let r = minimax(gameBoard.gameboard, player2.mark);
+      gameBoard.gameboard.splice(r.index, 1, player2.mark);
+      gameBoard.winner(aiMarker);
+      displayController.displayUpdate();
+      currentPlayer = playerSwapper();
+      boxes[r.index].removeEventListener("click", aiMarker);
+    }, 500);
   }
 
   //enables marking on boxes using ^ switcher
