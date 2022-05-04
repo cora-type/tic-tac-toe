@@ -21,6 +21,7 @@ const gameBoard = (() => {
   let boxes = document.querySelectorAll(".box");
   const versus = document.querySelector(".versus");
 
+  //winner helper
   function onlyString(array) {
     return array.every((element) => {
       return typeof element === "string";
@@ -34,7 +35,7 @@ const gameBoard = (() => {
       let second = gameBoard.gameboard[r[1]];
       let third = gameBoard.gameboard[r[2]];
 
-      // if all 3 arent undefined, compare them, if theyre all the same mark, winner based on mark
+      // if all 3 arent numbers(empty), compare them, if theyre all the same mark, winner based on mark
       if (isNaN(first) && isNaN(second) && isNaN(third)) {
         if (first === second && second === third) {
           boxes.forEach((box) => {
@@ -45,7 +46,7 @@ const gameBoard = (() => {
             ? (versus.innerText = player2.name + ", wins")
             : (versus.innerText = player1.name + ", wins");
         } else if (winnerFound == false && onlyString(gameBoard.gameboard)) {
-          //if there are no empty spaces left, and a winner still hasnt been found
+          //if there are only marks in the array, and a winner still hasnt been found
           winnerFound = false;
           versus.innerText = "tie";
         }
@@ -171,7 +172,9 @@ const gameInitializer = (() => {
   const userMarkX = document.getElementById("toggle-on");
   const replayButton = document.querySelector(".cta");
 
-  const computerButton = document.querySelector(".computer-button");
+  const impossibleButton = document.querySelector(".impossible-button");
+  const normalButton = document.querySelector(".normal-button");
+  const easyButton = document.querySelector(".easy-button");
 
   //reboot game
   const reboot = () => {
@@ -191,8 +194,8 @@ const gameInitializer = (() => {
     gameBoard.gameboard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   };
 
-  //reset game
-  const reset = () => {
+  //replay game
+  const replay = () => {
     let markers = document.querySelectorAll(".marker");
     currentPlayer = player1;
     winnerFound = false;
@@ -202,7 +205,10 @@ const gameInitializer = (() => {
       marker.remove();
     });
     gameBoard.gameboard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    gameBoard.marker(gameBoard.playerMarker); // initializes gameboard for marking
+    if (player2.name == "computer") {
+      gameBoard.marker(gameBoard.aiMarker); // initializes gameboard for marking
+    } else gameBoard.marker(gameBoard.playerMarker);
+
     displayController.displayUpdate();
   };
 
@@ -230,7 +236,7 @@ const gameInitializer = (() => {
     gameBoard.marker(gameBoard.playerMarker); // initializes gameboard for marking
   });
 
-  computerButton.addEventListener("click", function () {
+  const aiStart = () => {
     userMarkX.checked
       ? (player2 = player("computer", "O"))
       : (player2 = player("computer", "O"));
@@ -241,11 +247,14 @@ const gameInitializer = (() => {
 
     displayOpponentName.innerText = player2.name + ", " + player2.mark;
     gameBoard.marker(gameBoard.aiMarker);
-  });
+  };
+
+  //start game against impossible AI
+  impossibleButton.addEventListener("click", aiStart);
 
   resetButton.addEventListener("click", reboot);
 
-  replayButton.addEventListener("click", reset);
+  replayButton.addEventListener("click", replay);
   return {};
 })();
 

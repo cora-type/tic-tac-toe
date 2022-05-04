@@ -137,13 +137,22 @@ body {
   cursor: default;
 }
 
-.robot {
+#robot {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
-/* checkbox */
+.difficulties {
+  grid-area: 3/5/4/6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* checkbox  checkbox  checkbox  checkbox  checkbox  checkbox  checkbox  checkbox  checkbox  checkbox  checkbox */
 
 .mark-button {
   border: 3px solid #1a1a1a;
@@ -208,7 +217,7 @@ input[type="radio"].toggle:checked + label:after {
   left: 0;
 }
 
-/* From uiverse.io */
+/* From uiverse.io  From uiverse.io  From uiverse.io  From uiverse.io  From uiverse.io  From uiverse.io  From uiverse.io  From uiverse.io */
 .fancy {
   background-color: transparent;
   border: 2px solid #000;
@@ -321,7 +330,7 @@ input[type="radio"].toggle:checked + label:after {
   width: 0;
 }
 
-/* From uiverse.io by @alexmaracinaru */
+/* From uiverse.io by @alexmaracinaru From uiverse.io by @alexmaracinaru From uiverse.io by @alexmaracinaru From uiverse.io by @alexmaracinaru*/
 .cta {
   border: none;
   background: none;
@@ -372,14 +381,14 @@ input[type="radio"].toggle:checked + label:after {
   transform-origin: bottom left;
 }
 
-/* From uiverse.io by @Cevorob */
+/* From uiverse.io by @Cevorob  From uiverse.io by @Cevorob  From uiverse.io by @Cevorob  From uiverse.io by @Cevorob  From uiverse.io by @Cevorob */
+
 .computer-button {
-  grid-area: 3/5/4/6;
   position: relative;
   height: 50px;
   padding: 0 30px;
   border: 2px solid #000;
-  background: #e8e8e8;
+  background: #fff;
   user-select: none;
   white-space: nowrap;
   transition: all 0.05s linear;
@@ -390,7 +399,7 @@ input[type="radio"].toggle:checked + label:after {
 .computer-button:after {
   content: "";
   position: absolute;
-  background: #e8e8e8;
+  background: #fff;
   transition: all 0.2s linear;
 }
 
