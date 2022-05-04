@@ -89,7 +89,7 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
-  font-size: 42px;
+  font-size: 70px;
 }
 
 .button-input {
@@ -119,14 +119,14 @@ body {
   align-items: center;
   justify-content: center;
   display: flex;
-  font-size: 42px;
+  font-size: 70px;
 }
 
 .fancy.reset {
   margin: 20px;
 }
 .versus {
-  font-size: 130px;
+  font-size: 50px;
   grid-area: 4/3/5/4;
   align-items: center;
   justify-content: center;
@@ -135,6 +135,12 @@ body {
 
 .marker {
   cursor: default;
+}
+
+.robot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* checkbox */
@@ -364,4 +370,64 @@ input[type="radio"].toggle:checked + label:after {
 .cta:hover .hover-underline-animation:after {
   transform: scaleX(1);
   transform-origin: bottom left;
+}
+
+/* From uiverse.io by @Cevorob */
+.computer-button {
+  grid-area: 3/5/4/6;
+  position: relative;
+  height: 50px;
+  padding: 0 30px;
+  border: 2px solid #000;
+  background: #e8e8e8;
+  user-select: none;
+  white-space: nowrap;
+  transition: all 0.05s linear;
+  font-family: inherit;
+}
+
+.computer-button:before,
+.computer-button:after {
+  content: "";
+  position: absolute;
+  background: #e8e8e8;
+  transition: all 0.2s linear;
+}
+
+.computer-button:before {
+  width: calc(100% + 6px);
+  height: calc(100% - 16px);
+  top: 8px;
+  left: -3px;
+}
+
+.computer-button:after {
+  width: calc(100% - 16px);
+  height: calc(100% + 6px);
+  top: -3px;
+  left: 8px;
+}
+
+.computer-button:hover {
+  cursor: crosshair;
+}
+
+.computer-button:active {
+  transform: scale(0.95);
+}
+
+.computer-button:hover:before {
+  height: calc(100% - 32px);
+  top: 16px;
+}
+
+.computer-button:hover:after {
+  width: calc(100% - 32px);
+  left: 16px;
+}
+.computer-button span {
+  font-size: 15px;
+  z-index: 3;
+  position: relative;
+  font-weight: 600;
 }
