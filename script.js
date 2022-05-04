@@ -16,6 +16,7 @@ const winners = [
 ];
 
 const gameBoard = (() => {
+  //initialize the gameboard
   let gameboard = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 
   let boxes = document.querySelectorAll(".box");
@@ -67,7 +68,7 @@ const gameBoard = (() => {
 
   // references the event.target, which is the box
   function playerMarker(event) {
-    //if currentPlayer's mark is #, remove from array at box.id, replace with 'X'; update display; swap player;.
+    //if currentPlayer's mark is, remove from array at box.id, replace with 'mark'; update display; swap player;.
     switch (currentPlayer.mark) {
       case "X":
         gameBoard.gameboard.splice(event.target.id, 1, "X");
@@ -86,7 +87,6 @@ const gameBoard = (() => {
     }
   }
 
-  // references the event.target, which is the box
   function aiMarker(event) {
     //if currentPlayer is the user, mark the grid with user's mark.
     gameBoard.gameboard.splice(event.target.id, 1, player1.mark);
@@ -95,6 +95,7 @@ const gameBoard = (() => {
     currentPlayer = playerSwapper();
     event.target.removeEventListener("click", aiMarker);
     setTimeout(() => {
+      // wait .5s, call minimax to find optimal next position, set to r, splice at r.index, remove event listener
       let r = minimax(gameBoard.gameboard, player2.mark);
       gameBoard.gameboard.splice(r.index, 1, player2.mark);
       gameBoard.winner(aiMarker);
